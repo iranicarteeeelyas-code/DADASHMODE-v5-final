@@ -1,0 +1,14 @@
+{
+  "name": "داداش‌مود · موتور نمایش v5",
+  "short_name": "داداش‌مود",
+  "description": "موتور نمایش تلویزیونی مسابقات با دستیار کارگردان، صدای جمنای و سبک‌های سینمایی",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "portrait-primary",
+  "theme_color": "#12060a",
+  "background_color": "#0a0808",
+  "icons": [
+    {"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23ff3b3b' width='192' height='192'/><text x='50%' y='50%' font-size='140' font-weight='900' text-anchor='middle' dominant-baseline='central' fill='%23fff' font-family='Tahoma'>🎬</text></svg>", "sizes": "192x192", "type": "image/svg+xml"}
+  ]
+}
