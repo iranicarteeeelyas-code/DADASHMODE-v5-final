@@ -14,7 +14,7 @@
               so this is the safe way to get both. Uses a GPU keyer; falls back to chroma-only if WebGL is missing. */
 'use strict';
 (function(){
-const D=DM5,fa=D.fa,esc=D.esc;
+const D=window.DM5||window.D||(typeof DM5!=='undefined'?DM5:{}),fa=D.fa||(n=>String(n)),esc=D.esc||(s=>String(s??''));
 const STYLES={classic:'کلاسیک (نسخهٔ فعلی)',cinema:'سینمایی طلایی',arena:'آرنای نئونی سه‌بعدی',broadcast:'استودیو پخش زنده',noir:'تریلر تعلیق',studio3d:'استودیو سه‌بعدی واقعی (WebGL)'};
 const OUTS={full:'تمام‌صفحه (فعلی)',chroma:'کروما برای کپ‌کات',dual:'دوگانه: کروما + تمام‌صفحه هم‌زمان'};
 const KEYS={green:['#00b140','سبز'],blue:['#0047bb','آبی']};

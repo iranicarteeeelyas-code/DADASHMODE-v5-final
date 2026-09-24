@@ -6,7 +6,7 @@
    - printable call sheet. Everything is stored inside the episode (P.director), so phase-1 backups include it. */
 'use strict';
 (function(){
-const D=DM5,fa=D.fa,esc=D.esc;
+const D=window.DM5||window.D||(typeof DM5!=='undefined'?DM5:{}),fa=D.fa||(n=>String(n)),esc=D.esc||(s=>String(s??''));
 const def=()=>({v:1,cams:[{id:'1',name:'مستر ثابت (نمای باز)'},{id:'2',name:'دوربین نزدیک / متحرک'},{id:'3',name:'واکنش صورت (گوشی)'}],shots:{},props:[],lines:{},seg:{},notes:{},opt:{hud:true,speak:false,ahead:true}});
 const DIR=()=>D.bag('director',def);
 const players=()=>{const p=D.P();return p&&p.players?p.players:[]};

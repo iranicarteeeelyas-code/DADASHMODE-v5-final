@@ -5,6 +5,7 @@
 'use strict';
 (function(){
 const DM5=window.DM5=window.DM5||{};
+window.D=window.D||DM5;
 DM5.version='5.3.0';
 const has=n=>{try{return typeof window[n]!=='undefined'||eval('typeof '+n)!=='undefined'}catch(e){return false}};
 DM5.has=has;

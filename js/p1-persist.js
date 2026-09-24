@@ -171,5 +171,6 @@ async function onPanelChange(e){if(e.target.id!=='dm5Imp')return;const f=e.targe
  await waitFor(hasP);hookSave();await recoverEmergency();PV.lastSave=P.updated||0;setTimeout(()=>snapshot('شروع جلسه'),3000);
  setInterval(()=>mirrorSettings(false),2000);
  setInterval(()=>{if(Date.now()-PV.lastFolder>10*60e3)folderBackup(false)},60e3);
- window.DM5={flushNow,snapshot,exportBackup,importBackup,folderBackup,integrity,getSnaps:()=>getSnaps(P.id),_prune:prune,_enc:enc,_dec:dec}})();
+ window.DM5=Object.assign(window.DM5||{},{flushNow,snapshot,exportBackup,importBackup,folderBackup,integrity,getSnaps:()=>getSnaps(P.id),_prune:prune,_enc:enc,_dec:dec});
+ window.DM5P=window.DM5;})();
 })();

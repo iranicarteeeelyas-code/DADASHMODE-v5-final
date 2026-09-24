@@ -8,7 +8,7 @@
    The raw session is kept on the device, so closing the app mid-review loses nothing. */
 'use strict';
 (function(){
-const D=DM5,fa=D.fa,esc=D.esc;
+const D=window.DM5||window.D||(typeof DM5!=='undefined'?DM5:{}),fa=D.fa||(n=>String(n)),esc=D.esc||(s=>String(s??''));
 const OPT_DEF={minSilence:.55,minSpeech:.35,pad:.12,sens:.35,autoStop:1.2,onlyMissing:true,dropShort:true};
 const opt=()=>Object.assign({},OPT_DEF,(D.P()&&D.P().voiceCapture)||{});
 const setOpt=(k,v)=>{const p=D.P();p.voiceCapture=Object.assign({},opt(),{[k]:v});D.save()};

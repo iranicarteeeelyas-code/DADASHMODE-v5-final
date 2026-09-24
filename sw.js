@@ -1,4 +1,4 @@
-const VERSION='dadashmode-v5-all';
+const VERSION='dadashmode-v5-fixed-2';
 const CORE=['./','index.html','manifest.webmanifest','sw.js','css/app.css',
  'fonts/Vazirmatn-Variable.ttf','fonts/Lalezar-Regular.ttf','fonts/Estedad-Variable.ttf','fonts/Marhey-Variable.ttf','fonts/NotoKufiArabic-Variable.ttf',
  'icons/icon-192.png','icons/icon-512.png',
