@@ -1,27 +1,405 @@
-<!doctype html><html dir="rtl" lang="fa"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<meta name="theme-color" content="#12060a"><meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="داداش‌مود v5">
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>داداش‌مود · موتور نمایش ۵</title>
+<meta name="description" content="داداش‌مود · موتور نمایش ۵ — موتور گرافیک، دستیار کارگردان، سبک‌های سینماتیک و اجرای مسابقهٔ یوتیوب">
+<meta property="og:title" content="داداش‌مود · موتور نمایش ۵">
+<meta property="og:description" content="داداش‌مود · موتور نمایش ۵ — موتور گرافیک، دستیار کارگردان، سبک‌های سینماتیک و اجرای مسابقهٔ یوتیوب">
+<meta name="theme-color" content="#e8412f">
 <link rel="manifest" href="manifest.webmanifest">
-<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0808;color:#f4eef6;font:13px/1.6 Vazirmatn,Tahoma;overflow:hidden;direction:rtl}
-canvas{display:block}#toast{position:fixed;bottom:20px;right:20px;background:#ff3b3bf0;color:#fff;padding:12px 16px;border-radius:8px;font-weight:700;z-index:9999;display:none;direction:rtl}
-#toast.on{display:block;animation:pop .3s}@keyframes pop{0%{scale:.8;opacity:0}100%{scale:1;opacity:1}}</style>
-</head><body>
-<canvas id="stage"></canvas><div id="toast"></div>
-<!-- v4 core (unchanged) -->
-<script src="js/util.js"></script><script src="js/data.js"></script><script src="js/audio.js"></script>
-<script src="js/voice4.js"></script><script src="js/ai.js"></script><script src="js/icons.js"></script>
-<script src="js/game.js"></script><script src="js/script4.js"></script><script src="js/stage.js"></script>
-<script src="js/show.js"></script><script src="js/vfx4.js"></script><script src="js/sfx4.js"></script>
-<script src="js/ui.js"></script><script src="js/control4.js"></script>
-<!-- v5 phases 1-5 -->
-<script src="js/p1-persist.js"></script><script src="js/p2-live-graphics.js"></script>
-<script src="js/p345-core.js"></script><script src="js/p3-director.js"></script>
-<script src="js/p4-voicecapture.js"></script><script src="js/p5-cinema.js"></script><script src="js/p5-three.js"></script>
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><b>داداش‌مود</b><span>موتور نمایش ۵</span></div>
+  <input class="proj-name" id="projName" aria-label="نام قسمت">
+  <span class="net" id="net"></span>
+  <nav class="tabs" role="tablist" id="tabs">
+    <button role="tab" data-view="control" aria-selected="true">اتاق کنترل</button>
+    <button role="tab" data-view="script">سناریو و کارگردانی</button>
+    <button role="tab" data-view="intro">استودیو معرفی بازی</button>
+    <button role="tab" data-view="voice">صدا و گوینده</button>
+    <button role="tab" data-view="look">تم، چیدمان، لوگو</button>
+    <button role="tab" data-view="projects">قسمت‌ها و ضبط‌ها</button>
+    <button role="tab" data-view="settings">تنظیمات و API</button>
+  </nav>
+</header>
+
+<main>
+<!-- ================= CONTROL ROOM ================= -->
+<section id="view-control" class="control">
+  <aside class="col col-ros">
+    <div class="col-head"><h2>ترتیب اجرا</h2><span class="muted" id="rosCount"></span></div>
+    <ol class="ros" id="ros"></ol>
+    <div class="add-seg row"><select id="newSegType" style="flex:1" aria-label="نوع مرحله جدید"></select><button class="btn" id="addSeg"><i data-lucide="plus"></i>مرحله</button></div>
+  </aside>
+
+  <div class="col center">
+    <div class="monitor-bed">
+      <div class="monitor" id="monitor">
+        <canvas id="stage" width="1920" height="1080"></canvas>
+        <div class="guides" id="guides"></div>
+        <div class="tally" id="tally"></div>
+        <div class="countover hidden" id="countover"></div>
+      </div>
+    </div>
+    <div class="transport">
+      <button class="btn icon" id="tPrev" title="مرحله قبل (→)"><i data-lucide="chevron-right"></i></button>
+      <button class="btn pri" id="tPlay"><i data-lucide="play"></i><span>اجرا</span></button>
+      <button class="btn icon" id="tNext" title="مرحله بعد (←)"><i data-lucide="chevron-left"></i></button>
+      <button class="btn icon" id="tRestart" title="از اول همین مرحله (R)"><i data-lucide="rotate-ccw"></i></button>
+      <button class="btn icon" id="tStop" title="توقف کامل"><i data-lucide="square"></i></button>
+      <button class="btn icon" id="tFull" title="خروجی تمام‌صفحه (F)"><i data-lucide="maximize"></i></button>
+      <button class="btn sm" id="tProgram" title="خروجی تمیز در پنجرهٔ جدا (مانیتور دوم / OBS)"><i data-lucide="monitor"></i>خروجی تمیز</button>
+      <label class="row muted" style="color:oklch(0.8 0.01 30)"><input type="checkbox" id="tAuto"> پیشروی خودکار</label>
+      <div class="now" id="nowLine"></div>
+    </div>
+    <nav class="deck-tabs" id="deckTabs">
+      <button data-deck="game" aria-selected="true">بازی و بانک زمان</button>
+      <button data-deck="rehearse">تمرین و ضبط</button>
+      <button data-deck="sfx">افکت و دیالوگ فوری</button>
+      <button data-deck="journal">دفتر وقایع</button>
+      <button data-deck="ai">دستیار کارگردان</button>
+      <button data-deck="inspect">بازرسی و ایرادها <span class="badge" id="inspBadge"></span></button>
+    </nav>
+    <div class="deck">
+      <div data-panel="game">
+        <div class="deck-grid">
+          <section>
+            <div class="row" style="justify-content:space-between;margin-bottom:8px">
+              <h3 style="margin:0">بانک زمان</h3>
+              <div class="row"><span class="muted">گام</span><div class="seg-ctl" id="stepCtl"><button data-step="1">۱</button><button data-step="5">۵</button><button data-step="10">۱۰</button><button data-step="15">۱۵</button><button data-step="20">۲۰</button></div></div>
+            </div>
+            <div id="scores"></div>
+            <div class="row" style="margin-top:12px">
+              <button class="btn sm" id="undoBtn"><i data-lucide="undo-2"></i>برگرداندن آخرین تغییر</button>
+              <button class="btn sm info" id="varBtn"><i data-lucide="scan"></i><span>بازبینی VAR</span></button>
+            </div>
+            <div class="row" style="margin-top:18px;justify-content:space-between">
+              <div class="row"><span class="eyebrow">تایمر</span><b id="timerRead" style="font:400 26px/1 Lalezar;font-variant-numeric:tabular-nums"></b></div>
+              <div class="row"><button class="btn sm" id="tmToggle">شروع / مکث</button><button class="btn sm" id="tmPlus">+۱۰</button><button class="btn sm ghost" id="tmReset">ریست</button><button class="btn sm" id="holdBtn" title="تایمر اعتبارسنجی ۲ ثانیه روی صفحه">⏱ ۲ ثانیه</button></div>
+            </div>
+          </section>
+          <section id="gameDeck"></section>
+        </div>
+      </div>
+      <div data-panel="rehearse" class="hidden">
+        <div class="deck-grid">
+          <section>
+            <div class="row" style="justify-content:space-between;margin-bottom:12px"><h3 style="margin:0">حالت کار</h3><div class="seg-ctl" id="modeCtl"><button data-mode="rehearsal" aria-pressed="true">تمرین</button><button data-mode="record">ضبط</button></div></div>
+            <div id="rehearsePanel">
+              <p class="muted" style="margin:0 0 10px">در حالت تمرین چیزی ضبط نمی‌شود و هر تغییر امتیاز را می‌شود برگرداند.</p>
+              <div class="row" style="margin-bottom:14px">
+                <button class="btn sm" id="testStart"><i data-lucide="timer"></i>تست شروع</button>
+                <button class="btn sm" id="testSound"><i data-lucide="volume-2"></i>تست صدا</button>
+                <button class="btn sm" id="testAnim"><i data-lucide="clapperboard"></i>تست انیمیشن</button>
+                <button class="btn sm" id="testScore"><i data-lucide="trophy"></i>تست امتیاز</button>
+                <button class="btn sm" id="testAllVoice"><i data-lucide="volume-2"></i>پخش پشت‌سرهم همه صداها</button>
+                <button class="btn sm" id="testDry"><i data-lucide="film"></i>اجرای کامل آزمایشی</button>
+              </div>
+            </div>
+            <div id="recordPanel" class="hidden" style="margin-bottom:14px">
+              <button class="btn pri big" id="recBtn" style="width:100%"><i data-lucide="circle"></i><span>شروع ضبط از مرحله انتخاب‌شده</span></button>
+              <p class="muted" id="recInfo"></p>
+              <div id="recWarn"></div>
+            </div>
+          </section>
+          <section><div class="eyebrow" style="margin-bottom:6px">چک‌لیست قبل از فیلمبرداری</div><ul class="check" id="preflight"></ul></section>
+        </div>
+      </div>
+      <div data-panel="sfx" class="hidden">
+        <h3>افکت‌های صوتی (داخل ضبط هم می‌روند)</h3>
+        <div class="sfx-pad" id="sfxPad"></div>
+        <h3 style="margin-top:22px">دیالوگ‌های فوری این مرحله</h3>
+        <p class="muted" style="margin-top:-6px">در مرحلهٔ بازی زنده، دیالوگ‌ها خودکار پخش نمی‌شوند؛ هر وقت لازم شد از اینجا بزنید.</p>
+        <div class="row" id="quickLines"></div>
+      </div>
+      <div data-panel="journal" class="hidden">
+        <div class="row" style="justify-content:space-between;margin-bottom:10px"><h3 style="margin:0">دفتر وقایع (غیرقابل‌حذف)</h3><div class="row"><button class="btn sm" id="exportJournal"><i data-lucide="download"></i>خروجی CSV</button><button class="btn sm ghost" id="resetGame">شروع مسابقهٔ جدید</button></div></div>
+        <ol class="journal" id="journal"></ol>
+      </div>
+      <div data-panel="inspect" class="hidden">
+        <div class="row" style="justify-content:space-between"><b>بازرسی خودکار همهٔ مراحل</b><div class="row"><button class="btn sm" id="inspRun"><i data-lucide="refresh-cw"></i>بازرسی دوباره</button><button class="btn sm" id="inspFix"><i data-lucide="sparkles"></i>ساخت همهٔ صداهای ناقص</button></div></div>
+        <p class="muted" style="margin:6px 0 10px">هر ایراد را بزنید تا همان مرحله باز شود. ایرادهای قرمز جلوی یک ضبط سالم را می‌گیرند.</p>
+        <div id="inspectList"></div>
+      </div>
+      <div data-panel="ai" class="hidden">
+        <h3>دستیار کارگردان (هوش مصنوعی، فقط وقت ضرورت)</h3>
+        <p class="muted" style="margin-top:-6px">کل سناریو، وضعیت بانک‌ها و وقایع اخیر را می‌بیند. امتیاز را خودش تغییر نمی‌دهد؛ فقط پیشنهاد می‌دهد.</p>
+        <textarea id="aiQ" rows="3" placeholder="مثلاً: عماد می‌گوید دست دومش فقط به میز خورد، نه لیوان. تصمیم چیست؟"></textarea>
+        <div class="row" style="margin-top:8px"><button class="btn pri" id="aiAsk"><i data-lucide="send"></i>بپرس</button></div>
+        <div id="aiOut" style="margin-top:14px"></div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="col col-insp">
+    <div class="col-head"><h2 id="inspTitle">جزئیات مرحله</h2>
+      <div class="row"><button class="btn sm ghost" id="histUndo" title="واگرد ویرایش (Ctrl+Z)"><i data-lucide="undo-2"></i></button><button class="btn sm ghost" id="histRedo" title="ازنو (Ctrl+Y)"><i data-lucide="redo-2"></i></button><button class="btn sm ghost" id="dupSeg" title="کپی مرحله"><i data-lucide="copy"></i></button><button class="btn sm ghost" id="delSeg" title="حذف مرحله"><i data-lucide="trash-2"></i></button></div>
+    </div>
+    <div class="insp-body" id="insp"></div>
+  </aside>
+</section>
+
+<!-- ================= SCRIPT ================= -->
+<section id="view-script" class="hidden">
+  <div class="page">
+    <div class="page-head">
+      <div><h1>سناریو و دفتر کارگردانی</h1>
+      <p>کل فیلم‌نامه، دفتر کارگردانی و دیالوگ‌ها را اینجا بدهید (متن یا فایل). هوش مصنوعی آن را کامل می‌خواند و به مراحل، قوانین، دیالوگ با لحن و یادداشت کارگردان تبدیل می‌کند. برای هر ویدیو یک قسمت جدید بسازید.</p></div>
+      <label class="btn pri"><i data-lucide="upload"></i>افزودن PDF / md / متن<input type="file" id="scriptFile" accept=".pdf,.txt,.md,.json,.srt,application/pdf,text/*" multiple hidden></label>
+    </div>
+    <div class="split">
+      <div>
+        <div class="block" style="margin-bottom:14px"><h2>منابع این قسمت <span class="muted" style="font-weight:600">(بالا = قدیمی‌تر، پایین = جدیدتر؛ در تناقض، جدیدتر برنده است)</span></h2><div id="srcList"></div></div>
+        <label class="f">یادداشت‌ها و تغییرات جدید کارگردان (جدیدترین منبع حساب می‌شود)<textarea id="scriptText" rows="12" placeholder="متن آزاد (با هوش مصنوعی) یا قالب استاندارد (بدون اینترنت)"></textarea></label>
+        <div class="row" style="margin-top:12px">
+          <button class="btn pri" id="aiParse"><i data-lucide="sparkles"></i>درک کامل با هوش مصنوعی</button>
+          <button class="btn" id="offParse"><i data-lucide="file-text"></i>تبدیل آفلاین (قالب استاندارد)</button>
+          <label class="row muted"><input type="checkbox" id="parseAppend"> به انتهای ترتیب فعلی اضافه شود</label>
+          <label class="row muted"><input type="checkbox" id="parseNew"> ساخت قسمت جدید (قسمت فعلی دست‌نخورده بماند)</label>
+        </div>
+        <p class="muted" id="parseMsg"></p>
+      </div>
+      <div>
+        <div class="block"><h2>درک موتور از سناریو</h2><div id="briefOut" class="brief"></div></div>
+        <div class="block"><h2>قالب استاندارد (بدون اینترنت)</h2>
+<div class="fmt">نام قسمت: داداش‌مود · قسمت ۲
+واحد: ثانیه
+بانک اولیه: 20
+بازیکن: الیاس، #ff2738
+بازیکن: عماد، #00c98d
+
+## [افتتاحیه] داداش‌مود
+زیرعنوان: قسمت دو
+مجری (هیجان‌زده): سلام به همه!
+
+## [معرفی] {لیوان} برج لیوان
+زیرعنوان: راند یک
+
+## [قوانین] {لیوان} قوانین برج لیوان
+قانون: ۱۰ لیوان، فقط یک دست
+مجری (آرام و توضیحی): خوب گوش کنید...
+
+## [بازی] {لیوان} برج لیوان
+زمان: 30
+جایزه: 10
+یادداشت: دوربین ۲ روی دست‌ها</div>
+          <p class="muted">انواع مرحله: افتتاحیه، معرفی، قوانین، شمارش، بازی، بانک، دیالوگ، برنده، کارت. بازی‌ها: لیوان، فاصله، مرموز، دستکش، ریسک، کیف. لحن‌ها: <span id="emoList"></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INTRO STUDIO ================= -->
+<section id="view-intro" class="hidden">
+  <div class="page">
+    <div class="page-head"><div><h1>استودیو معرفی بازی و قوانین</h1>
+      <p>بخش جدا برای معرفی تمام‌صفحهٔ هر بازی: عنوان سینمایی، تصویرسازی متحرک مخصوص همان بازی، قوانین مرحله‌به‌مرحله هم‌زمان با صدا و زیرنویس فارسی. هر معرفی را جدا ضبط کنید (ویدیو + فایل زیرنویس SRT) و در ادیت سر جایش بگذارید.</p></div></div>
+    <div class="split">
+      <div class="block"><h2>معرفی‌های این قسمت</h2><div class="intro-list" id="introList"></div></div>
+      <div class="block"><h2>ساخت معرفی جدید با هوش مصنوعی</h2>
+        <div style="display:grid;gap:12px">
+          <div class="grid2"><label class="f">نام بازی یا چالش<input type="text" id="gName" placeholder="مثلاً: آخرین نفری که دستش را بردارد"></label>
+          <label class="f">تصویرسازی<select id="gGame"></select></label></div>
+          <div class="grid2"><label class="f">حس و حال<select id="gVibe"><option>پرهیجان و رقابتی</option><option>بامزه و شوخ</option><option>ترسناک و پرتعلیق</option><option>حماسی و بزرگ</option></select></label>
+          <label class="f">زمان و جایزه<input type="text" id="gMeta" placeholder="۳۰ ثانیه · ۱۰+ ثانیه"></label></div>
+          <label class="f">قوانین خام (هر خط یک قانون، یا متن آزاد)<textarea id="gRules" rows="6"></textarea></label>
+          <div class="row"><button class="btn pri" id="aiGame"><i data-lucide="sparkles"></i>بساز و اضافه کن</button><button class="btn" id="offGame">نسخهٔ آفلاین ساده</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VOICE ================= -->
+<section id="view-voice" class="hidden">
+  <div class="page">
+    <div class="page-head">
+      <div><h1>صدا و گوینده</h1>
+      <p>هر دیالوگ یک بار با لحن مخصوص همان لحظه ساخته و داخل خود اپ نصب می‌شود. سر فیلمبرداری هیچ اتصالی لازم نیست و صدا مستقیم داخل فایل ویدیو ضبط می‌شود.</p></div>
+      <div class="row"><button class="btn" id="exportVoice"><i data-lucide="download"></i>خروجی بستهٔ صدا</button><label class="btn"><i data-lucide="upload"></i>نصب بستهٔ صدا<input type="file" id="importVoice" accept=".json" hidden></label><button class="btn" id="exportWavs"><i data-lucide="folder"></i>خروجی WAV برای تدوین</button></div>
+    </div>
+    <div class="vbar">
+      <div class="big" id="vCount"></div>
+      <div><div class="progress"><div id="vProg"></div></div><div class="muted" id="vNote" style="margin-top:6px"></div></div>
+      <button class="btn pri" id="genAll"><i data-lucide="sparkles"></i>ساخت و نصب همهٔ صداهای ناقص</button>
+    </div>
+    <div class="split">
+      <div class="block"><h2>همهٔ دیالوگ‌ها</h2><div id="voiceTable"></div></div>
+      <div>
+        <div class="block"><h2>موتورهای صدای در دسترس</h2><div id="engines"></div><p class="muted" style="margin:8px 0 0">اگر موتور گوینده خطا بدهد، اپ خودکار موتور بعدی را امتحان می‌کند تا هیچ دیالوگی بی‌صدا نماند.</p><div class="row" style="margin-top:10px"><button class="btn sm" id="installFolder"><i data-lucide="folder-down"></i>نصب فیزیکی همهٔ صداها در پوشهٔ voices</button></div></div>
+        <div class="block"><h2>واژه‌نامهٔ تلفظ (اِعراب)</h2><p class="muted" style="margin-top:0">هر خط: «واژه = خوانش». فقط روی صدا اعمال می‌شود، زیرنویس دست نمی‌خورد. بعد از تغییر، صدای خط‌های مربوط را «دوباره» بسازید.</p><textarea id="lexicon" rows="7" dir="rtl"></textarea></div>
+        <div class="block"><h2>گوینده‌ها</h2><div id="speakers"></div><button class="btn sm" id="addSpeaker" style="margin-top:10px"><i data-lucide="plus"></i>گوینده</button></div>
+        <div class="block"><h2>موتور اضطراری روی دستگاه</h2>
+          <div class="prose"><p>اگر روز فیلمبرداری دیالوگ جدیدی لازم شد و اینترنت نبود: موتور عصبی Piper داخل مرورگر اجرا می‌شود (یک بار دانلود حدود ۶۰ مگ، بعد کاملاً آفلاین). صداهای فارسی موجود این موتور <b>مردانه</b> هستند؛ فقط برای مواقع اضطراری.</p></div>
+          <div class="row"><button class="btn sm" id="piperInstall"><i data-lucide="download"></i>دانلود و نصب موتور</button><span class="muted" id="piperInfo"></span></div>
+        </div>
+        <div class="block"><h2>چرا سر صحنه قطع نمی‌شود</h2>
+          <div class="prose">
+            <p>نسخهٔ قبلی به یک فایل مدل (<code>fa_IR-gyro-medium.onnx</code>) و برنامهٔ <code>piper</code> روی سرور وابسته بود که هیچ‌کدام داخل بسته نبودند؛ برای همین هیچ دیالوگی گفته نمی‌شد. آن صدا هم در واقع مردانه بود.</p>
+            <p>در نسخهٔ ۴، صدای زن فارسی با Gemini، یا بدون هیچ کلیدی با «دلارا»ی مایکروسافت (وقتی اپ با start-windows.bat باز شود)، یا OpenAI ساخته می‌شود و فایلش در حافظهٔ دائمی اپ و در پوشهٔ <code>voices</code> کنار اپ ذخیره می‌شود. پخش آنی است و به اینترنت ربطی ندارد.</p>
+            <p>قبل از روز فیلمبرداری: همه صداها سبز شوند، «ذخیرهٔ دائمی» را فعال کنید و یک خروجی بستهٔ صدا به‌عنوان پشتیبان بگیرید.</p>
+          </div>
+          <div class="row" style="margin-top:10px"><button class="btn sm" id="persistBtn"><i data-lucide="hard-drive"></i>فعال‌سازی ذخیرهٔ دائمی</button><span class="muted" id="storageInfo"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOOK ================= -->
+<section id="view-look" class="hidden">
+  <div class="page">
+    <div class="page-head"><div><h1>تم، چیدمان و لوگو</h1><p>هر قسمت تم خودش را دارد. چیدمان پیش‌فرض استاندارد پخش تلویزیونی است و همه‌چیز قابل تغییر است.</p></div></div>
+    <div class="split">
+      <div>
+        <div class="block"><h2>تم‌های آماده</h2><div class="themes" id="themes"></div></div>
+        <div class="block"><h2>رنگ‌های سفارشی</h2><div class="colors" id="colors"></div></div>
+        <div class="block"><h2>بازیکن‌ها</h2><div id="playersEdit"></div><div class="row" style="margin-top:10px"><button class="btn sm" id="addPlayer"><i data-lucide="user-plus"></i>بازیکن</button></div>
+          <div class="grid2" style="margin-top:14px"><label class="f">واحد امتیاز<input type="text" id="unitIn"></label><label class="f">بانک اولیهٔ هر نفر<input type="number" id="startIn" min="0"></label></div></div>
+        <div class="block"><h2>تایپوگرافی و چیدمان</h2>
+          <div class="grid2">
+            <label class="f">فونت نمایشی<select id="lyFont"></select></label>
+            <label class="f">جای کارت‌های بانک زمان<select id="lyScore"><option value="bottom">پایین صفحه</option><option value="top">بالای صفحه</option></select></label>
+            <label class="f">جای تایمر<select id="lyTimer"><option value="top">بالا وسط</option><option value="corner">گوشه</option></select></label>
+            <label class="f">اندازهٔ زیرنویس: <span id="lySubV"></span><input type="range" id="lySub" min="34" max="64" step="2"></label>
+          </div>
+          <div class="row" style="margin-top:14px">
+            <label class="row"><input type="checkbox" id="lyGreen"> پس‌زمینهٔ سبز (کروما) در بازی زنده</label>
+            <label class="row"><input type="checkbox" id="lyGuides"> خطوط محدودهٔ امن</label>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="block"><h2>لوگو</h2>
+          <p class="prose" style="margin-top:0">لوگو را بدهید؛ رنگ پس‌زمینه از گوشه‌ها تحلیل می‌شود، جدا می‌شود، لبه‌ها تمیز و دور آن بریده می‌شود و با درخشش روی صحنه می‌نشیند. رنگ‌های لوگو هم برای تم پیشنهاد می‌شوند.</p>
+          <label class="btn" style="margin-bottom:12px"><i data-lucide="image-up"></i>انتخاب فایل لوگو<input type="file" id="logoFile" accept="image/*" hidden></label>
+          <div class="logo-pair">
+            <div><div class="eyebrow">اصلی</div><div class="checker" id="logoOrig"><span class="muted">لوگویی نیست</span></div></div>
+            <div><div class="eyebrow">بدون پس‌زمینه</div><div class="checker dark" id="logoCut"><span class="muted">—</span></div></div>
+          </div>
+          <label class="f" style="margin-top:14px">حساسیت جداسازی: <span id="tolV"></span><input type="range" id="logoTol" min="8" max="140"></label>
+          <div class="row" style="margin-top:10px">
+            <button class="btn sm" id="logoAuto">جداسازی از لبه‌ها</button><button class="btn sm" id="logoGlobal">حذف سراسری رنگ پس‌زمینه</button>
+            <button class="btn sm ghost" id="logoKeep">استفاده از اصل</button><button class="btn sm ghost" id="logoDel">حذف لوگو</button>
+          </div>
+          <p class="muted" style="margin:8px 0 0">اگر بخشی از پس‌زمینه ماند: روی همان رنگ در تصویر «اصلی» کلیک کنید تا آن رنگ هم حذف شود.</p>
+          <div class="row" id="logoPal" style="margin-top:12px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="view-projects" class="hidden">
+  <div class="page">
+    <div class="page-head"><div><h1>قسمت‌ها و ضبط‌ها</h1><p>هر ویدیو یک قسمت. اپ یک‌بارمصرف نیست: قسمت جدید بسازید، از قبلی کپی بگیرید، یا فایل قسمت را بین گوشی و کامپیوتر جابه‌جا کنید.</p></div>
+      <div class="row"><button class="btn pri" id="newTpl"><i data-lucide="plus"></i>قسمت از قالب بانک زمان</button><button class="btn" id="newBlank">قسمت خالی</button><label class="btn"><i data-lucide="upload"></i>ورود قسمت<input type="file" id="importProj" accept=".json" hidden></label></div>
+    </div>
+    <div class="split">
+      <div class="block"><h2>قسمت‌ها</h2><div id="projList"></div></div>
+      <div class="block"><h2>ضبط‌ها</h2><p class="muted" style="margin-top:0">داخل گوشی/کامپیوتر ذخیره می‌شوند. «اشتراک» روی گوشی مستقیم به گوگل‌درایو، گالری یا هر فضای ابری می‌فرستد. روی کامپیوتر می‌توانید پوشهٔ همگام گوگل‌درایو را در تنظیمات انتخاب کنید تا هر ضبط خودکار آنجا هم برود.</p><div id="takes"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SETTINGS ================= -->
+<section id="view-settings" class="hidden">
+  <div class="page">
+    <div class="page-head"><div><h1>تنظیمات و API</h1><p>هوش مصنوعی فقط وقتی لازم است استفاده می‌شود: درک سناریو، نوشتن متن معرفی، ساخت صدا و دستیار کارگردان. اجرای نمایش هیچ‌وقت به آن وابسته نیست.</p></div></div>
+    <div class="split">
+      <div>
+        <div class="block"><h2>کلید API هوش مصنوعی</h2>
+          <div style="display:grid;gap:12px">
+            <label class="f">سرویس اصلی برای درک متن<select id="sProv"><option value="gemini">Google Gemini</option><option value="openai">OpenAI یا سرویس سازگار</option></select></label>
+            <label class="f">کلید Gemini<div class="row" style="flex-wrap:nowrap"><input type="password" id="sGKey" placeholder="AIza..." autocomplete="off"><button class="btn sm" data-show="sGKey">نمایش</button></div></label>
+            <div class="grid2"><label class="f">مدل متن Gemini<input type="text" id="sGChat" dir="ltr"></label><label class="f">مدل صدای Gemini<input type="text" id="sGTts" dir="ltr"></label></div>
+            <label class="f">کلید OpenAI<div class="row" style="flex-wrap:nowrap"><input type="password" id="sOKey" placeholder="sk-..." autocomplete="off"><button class="btn sm" data-show="sOKey">نمایش</button></div></label>
+            <label class="f">آدرس سرویس OpenAI (یا واسط سازگار)<input type="text" id="sOBase" dir="ltr"></label>
+            <div class="grid2"><label class="f">مدل متن OpenAI<input type="text" id="sOChat" dir="ltr"></label><label class="f">مدل صدای OpenAI<input type="text" id="sOTts" dir="ltr"></label></div>
+            <div class="row"><button class="btn" id="sTest"><i data-lucide="plug-zap"></i>تست اتصال</button><span class="muted" id="sTestOut"></span></div>
+            <p class="muted" style="margin:0">کلیدها فقط روی همین دستگاه ذخیره می‌شوند و داخل فایل قسمت یا بستهٔ صدا نمی‌روند. برای امنیت، در Google AI Studio کلید را به دامنهٔ اپ محدود کنید.</p>
+          </div>
+        </div>
+        <div class="block"><h2>ایمنی صدا و جلوه‌های تصویری</h2>
+          <div style="display:grid;gap:8px">
+            <label class="row"><input type="checkbox" id="sFallback"> اگر موتور گوینده خطا داد، خودکار موتور زن دیگری امتحان شود (Gemini ← دلارا ← OpenAI)</label>
+            <label class="row"><input type="checkbox" id="sAllowMale"> در بدترین حالت، موتور اضطراری روی دستگاه (مردانه) هم مجاز باشد</label>
+            <label class="row"><input type="checkbox" id="sBloom"> درخشش سینمایی (Bloom) و لرزش دوربین روی ضربه‌ها</label>
+            <label class="f">صدای Gemini برای موتور جایگزین<input type="text" id="sFbGemini" dir="ltr" placeholder="Leda"></label>
+          </div>
+        </div>
+        <div class="block"><h2>بانک افکت و موسیقی حرفه‌ای</h2><p class="muted" style="margin-top:0">افکت‌ها داخل اپ ساخته می‌شوند. برای سطح برنامه‌های تلویزیونی، فایل‌های خودتان (WAV/MP3 دارای مجوز) را برای هر جایگاه بدهید؛ فایل شما جای صدای ساختگی را می‌گیرد و آفلاین ذخیره می‌شود.</p><div id="sfxBank"></div></div>
+        <div class="block"><h2>کیفیت ضبط (یوتیوب)</h2>
+          <div class="grid2">
+            <label class="f">رزولوشن<select id="sQual"><option value="1080p">1080p · استاندارد یوتیوب</option><option value="1440p">1440p · کیفیت پردازش بالاتر یوتیوب</option><option value="2160p">4K · فقط سیستم قوی</option></select></label>
+            <label class="f">فریم بر ثانیه<select id="sFps"><option value="60">60</option><option value="30">30</option></select></label>
+          </div>
+          <p class="muted" id="codecInfo"></p>
+          <div style="display:grid;gap:6px;margin-top:8px">
+            <label class="row"><input type="checkbox" id="sAutoDl"> بعد از هر ضبط، ویدیو و زیرنویس خودکار دانلود شوند</label>
+            <label class="row"><input type="checkbox" id="sWake"> صفحه هنگام ضبط خاموش نشود</label>
+            <label class="row"><input type="checkbox" id="sNorm"> یکسان‌سازی بلندی صدای همهٔ دیالوگ‌ها</label>
+            <label class="row"><input type="checkbox" id="sBed"> موسیقی زمینهٔ تعلیق (زیر صدا کم می‌شود)</label>
+            <label class="row"><input type="checkbox" id="sDevTts"> اگر صدای نصب‌شده نبود، در تمرین از صدای دستگاه استفاده شود (داخل ویدیو ضبط نمی‌شود)</label>
+          </div>
+          <div class="grid2" style="margin-top:12px"><label class="f">بلندی افکت‌ها<input type="range" id="sSfx" min="0" max="1" step=".05"></label><label class="f">بلندی صدای گوینده<input type="range" id="sVoice" min="0.3" max="1.8" step=".05"></label></div>
+          <div class="row" style="margin-top:12px"><button class="btn sm" id="pickFolder"><i data-lucide="folder"></i>انتخاب پوشهٔ ذخیرهٔ خودکار (مثلاً گوگل‌درایو)</button><span class="muted" id="folderInfo"></span></div>
+        </div>
+      </div>
+      <div class="block"><h2>میان‌برهای صفحه‌کلید</h2>
+        <table class="table">
+          <tr><td><span class="kbd">Space</span></td><td>اجرا / مکث</td></tr>
+          <tr><td><span class="kbd">←</span> / <span class="kbd">→</span></td><td>مرحله بعد / قبل</td></tr>
+          <tr><td><span class="kbd">R</span></td><td>از اول همین مرحله</td></tr>
+          <tr><td><span class="kbd">A</span> / <span class="kbd">L</span></td><td>برد راند برای بازیکن اول / دوم (جایزهٔ همان راند)</td></tr>
+          <tr><td><span class="kbd">1</span> تا <span class="kbd">6</span></td><td>+گام برای بازیکن (با Shift کم می‌شود)</td></tr>
+          <tr><td><span class="kbd">V</span></td><td>روشن/خاموش VAR</td></tr>
+          <tr><td><span class="kbd">Z</span></td><td>برگرداندن آخرین تغییر امتیاز</td></tr>
+          <tr><td><span class="kbd">T</span></td><td>شروع / مکث تایمر</td></tr>
+          <tr><td><span class="kbd">H</span></td><td>تایمر اعتبارسنجی ۲ ثانیه</td></tr>
+          <tr><td><span class="kbd">F</span></td><td>خروجی تمام‌صفحه</td></tr>
+        </table>
+        <div class="banner info" style="margin-top:18px"><b>نصب روی گوشی و کار بدون اینترنت</b><span>اپ را از یک آدرس https باز کنید (مثلاً GitHub Pages، راهنما در README) و «افزودن به صفحهٔ اصلی» را بزنید. همهٔ فایل‌ها، فونت‌ها و صداها روی دستگاه نصب می‌شوند.</span><span id="swInfo" class="muted"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="js/util.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/voice4.js"></script>
+<script src="js/game.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/script4.js"></script>
+<script src="js/stage.js"></script>
+<script src="js/show.js"></script>
+<script src="js/vfx4.js"></script>
+<script src="js/sfx4.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/control4.js"></script>
+
+<!-- DADASHMODE v5 · phases 1-5 -->
+<script src="js/p1-persist.js"></script>
+<script src="js/p2-live-graphics.js"></script>
+<script src="js/p345-core.js"></script>
+<script src="js/p3-director.js"></script>
+<script src="js/p4-voicecapture.js"></script>
+<script src="js/p5-cinema.js"></script>
+<script src="js/p5-three.js"></script>
 <script>
 'use strict';
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').then(r=>{console.log('SW ok')}).catch(e=>{console.warn('SW:',e.message)});
 </script>
-</body></html>
+</body>
+</html>

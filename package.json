@@ -1,0 +1,14 @@
+{
+  "name": "dadashmode-v5-ultimate",
+  "version": "5.3.0",
+  "description": "داداش‌مود · موتور نمایش ۵ — موتور گرافیک، دستیار کارگردان، سبک‌های سینماتیک و اجرای مسابقهٔ یوتیوب",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node --check server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

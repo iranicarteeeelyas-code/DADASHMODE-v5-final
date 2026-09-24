@@ -1,0 +1,7 @@
+{
+  "name": "DADASHMODE v5 Ultimate",
+  "description": "داداش‌مود · موتور نمایش ۵ — موتور گرافیک، دستیار کارگردان، سبک‌های سینماتیک و اجرای مسابقهٔ یوتیوب",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

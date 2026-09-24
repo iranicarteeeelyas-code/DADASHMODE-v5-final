@@ -1,0 +1,860 @@
+{
+ "format": "dadashmode-episode/3",
+ "name": "داداش‌مود · بانک زمان · قسمت ۱",
+ "unit": "ثانیه",
+ "startBank": 20,
+ "speakers": [
+  {
+   "id": "host",
+   "name": "نیلا (مجری و داور)",
+   "provider": "gemini",
+   "voice": "Leda"
+  }
+ ],
+ "players": [
+  {
+   "id": "elias",
+   "name": "اِلیاس",
+   "color": "#ff2738",
+   "symbol": "▲",
+   "key": "a"
+  },
+  {
+   "id": "emad",
+   "name": "عِماد",
+   "color": "#00c98d",
+   "symbol": "●",
+   "key": "l"
+  }
+ ],
+ "theme": {
+  "font": "Lalezar",
+  "name": "استودیو قرمز",
+  "bg1": "#12060a",
+  "bg2": "#4f0d1c",
+  "accent": "#ff3b3b",
+  "accent2": "#ffd23f",
+  "ink": "#fff7ec",
+  "shade": "#7a0f1f"
+ },
+ "brief": {
+  "summary": "دوئل الیاس و عماد در شش راند. تنها پول مسابقه «ثانیه» است؛ هر دو با ۲۰ ثانیه شروع می‌کنند و ثانیه‌های جمع‌شده در توالی نهایی خرج می‌شود.",
+  "tone": "مجری زن پرانرژی، کوتاه‌گو، منصف با کمی کُری. حین بازی کم حرف بزند؛ واکنش بازیکن‌ها مهم‌تر است.",
+  "characters": [
+   "اِلیاس · قرمز · نماد مثلث · کلید A",
+   "عِماد · سبز · نماد دایره · کلید L",
+   "نیلا · مجری و داور"
+  ],
+  "beats": [
+   "افتتاحیه و معرفی بانک زمان",
+   "راند ۱ تا ۵ با پاداش ثانیه",
+   "توالی نهایی و باز کردن کیف طلایی"
+  ],
+  "directorNotes": [
+   "هیچ نتیجه‌ای برای جذاب‌تر شدن عوض نمی‌شود",
+   "اگر نتیجه واضح نیست: بازبینی VAR",
+   "کدهای کیف روی کاغذ هم نوشته شود"
+  ]
+ },
+ "segments": [
+  {
+   "id": "ne99i7u",
+   "type": "title",
+   "game": "generic",
+   "title": "داداش‌مود",
+   "subtitle": "بانک زمان · قسمت یک",
+   "rules": [],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "37481bn",
+     "speaker": "host",
+     "emotion": "excited",
+     "text": "سلام سلام! به داداش‌مود خوش اومدید!",
+     "direction": ""
+    },
+    {
+     "id": "ggbftuj",
+     "speaker": "host",
+     "emotion": "warm",
+     "text": "امشب اِلیاس و عِماد روبه‌روی هم وایسادن، و تنها پول این بازی... زمانه.",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "yc7yyzc",
+   "type": "bank",
+   "game": "generic",
+   "title": "بانک زمان",
+   "subtitle": "هر نفر با ۲۰ ثانیه شروع می‌کند",
+   "rules": [],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "zkobfqa",
+     "speaker": "host",
+     "emotion": "calm",
+     "text": "قانون اصلی ساده‌ست: هر کدومتون با بیست ثانیه شروع می‌کنید.",
+     "direction": ""
+    },
+    {
+     "id": "xa4i2q1",
+     "speaker": "host",
+     "emotion": "suspense",
+     "text": "هر راندی که ببرید، ثانیه به بانکتون اضافه می‌شه. هر اشتباه، ثانیه می‌سوزونه.",
+     "direction": ""
+    },
+    {
+     "id": "ury92yp",
+     "speaker": "host",
+     "emotion": "epic",
+     "text": "و آخر بازی، همین ثانیه‌ها تعیین می‌کنه کی کیف طلایی رو باز می‌کنه.",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "9gd1w7y",
+   "type": "intro",
+   "game": "cup",
+   "title": "برج لیوان",
+   "subtitle": "راند یک",
+   "rules": [],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "7p3fuva",
+     "speaker": "host",
+     "emotion": "suspense",
+     "text": "راند اول... چالشی که دست‌ها رو می‌لرزونه.",
+     "direction": ""
+    },
+    {
+     "id": "l6cdt00",
+     "speaker": "host",
+     "emotion": "excited",
+     "text": "برج لیوان!",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "r7uh1y2",
+   "type": "rules",
+   "game": "cup",
+   "title": "قوانین برج لیوان",
+   "subtitle": "",
+   "rules": [
+    "۱۰ لیوان، چیدمان ۱-۲-۳-۴",
+    "فقط با یک دست",
+    "دست دوم = خطا",
+    "برج باید ۲ ثانیه سرپا بماند",
+    "جایزه: ۱۰+ ثانیه"
+   ],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "5mqtcth",
+     "speaker": "host",
+     "emotion": "calm",
+     "text": "قوانین رو خوب گوش کنید.",
+     "direction": ""
+    },
+    {
+     "id": "n1q2dz0",
+     "speaker": "host",
+     "emotion": "calm",
+     "text": "ده تا لیوان، به شکل هرم یک، دو، سه، چهار.",
+     "direction": ""
+    },
+    {
+     "id": "sb6vfkf",
+     "speaker": "host",
+     "emotion": "serious",
+     "text": "فقط با یک دست! دست دوم پشت کمر.",
+     "direction": ""
+    },
+    {
+     "id": "zc6xppm",
+     "speaker": "host",
+     "emotion": "referee",
+     "text": "اگه دست دوم بیاد وسط، خطاست.",
+     "direction": ""
+    },
+    {
+     "id": "g4ix7yv",
+     "speaker": "host",
+     "emotion": "suspense",
+     "text": "برج باید دو ثانیه کامل سرپا بمونه.",
+     "direction": ""
+    },
+    {
+     "id": "df8v54k",
+     "speaker": "host",
+     "emotion": "excited",
+     "text": "و برنده، ده ثانیه می‌گیره!",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "7ockvnq",
+   "type": "countdown",
+   "game": "generic",
+   "title": "آماده‌اید؟",
+   "subtitle": "",
+   "rules": [],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": []
+  },
+  {
+   "id": "ra5tp13",
+   "type": "play",
+   "game": "cup",
+   "title": "برج لیوان",
+   "subtitle": "راند یک",
+   "rules": [],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": []
+  },
+  {
+   "id": "ng43qjs",
+   "type": "intro",
+   "game": "distance",
+   "title": "فاصله را انتخاب کن",
+   "subtitle": "راند دو",
+   "rules": [],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "5f79p2g",
+     "speaker": "host",
+     "emotion": "playful",
+     "text": "راند دوم مال کسایی‌ه که به خودشون اعتماد دارن.",
+     "direction": ""
+    },
+    {
+     "id": "v026f6q",
+     "speaker": "host",
+     "emotion": "excited",
+     "text": "فاصله رو انتخاب کن!",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "hegh2in",
+   "type": "rules",
+   "game": "distance",
+   "title": "قوانین فاصله",
+   "subtitle": "",
+   "rules": [
+    "سبز ۵+ · زرد ۱۰+ · قرمز ۲۰+",
+    "انتخاب قبل از پرتاب اول قفل می‌شود",
+    "هر نفر ۳ پرتاب"
+   ],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "zmj67xf",
+     "speaker": "host",
+     "emotion": "calm",
+     "text": "سه تا خط داریم.",
+     "direction": ""
+    },
+    {
+     "id": "4yquklf",
+     "speaker": "host",
+     "emotion": "calm",
+     "text": "سبز پنج ثانیه، زرد ده ثانیه، قرمز بیست ثانیه.",
+     "direction": ""
+    },
+    {
+     "id": "8t0nyxk",
+     "speaker": "host",
+     "emotion": "serious",
+     "text": "قبل از پرتاب اول انتخاب می‌کنید، و دیگه عوض نمی‌شه.",
+     "direction": ""
+    },
+    {
+     "id": "k2ksbrw",
+     "speaker": "host",
+     "emotion": "taunt",
+     "text": "سه تا پرتاب. ببینیم کی جرئت خط قرمز رو داره.",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "r4mgmzr",
+   "type": "play",
+   "game": "distance",
+   "title": "فاصله را انتخاب کن",
+   "subtitle": "راند دو",
+   "rules": [],
+   "duration": 45,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "v44lycy",
+     "speaker": "host",
+     "emotion": "referee",
+     "text": "انتخاب قفل شد.",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "523inub",
+   "type": "intro",
+   "game": "mystery",
+   "title": "لقمهٔ مرموز",
+   "subtitle": "راند سه",
+   "rules": [],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "7df4ekg",
+     "speaker": "host",
+     "emotion": "whisper",
+     "text": "شش تا جعبه. هیچ‌کس نمی‌دونه توشون چیه... حتی من.",
+     "direction": ""
+    },
+    {
+     "id": "hbqcu7m",
+     "speaker": "host",
+     "emotion": "excited",
+     "text": "لقمهٔ مرموز!",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "mmm2y9x",
+   "type": "rules",
+   "game": "mystery",
+   "title": "قوانین لقمهٔ مرموز",
+   "subtitle": "",
+   "rules": [
+    "۶ جعبه · شماره ۱ تا ۶",
+    "دو جعبه: ۱۵+ ثانیه",
+    "یک جعبه: ۵ ثانیه از حریف می‌دزدد",
+    "سه جعبه: پوچ"
+   ],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "nacxunu",
+     "speaker": "host",
+     "emotion": "calm",
+     "text": "هر کدوم یه جعبه انتخاب می‌کنید و لقمه‌ش رو می‌خورید.",
+     "direction": ""
+    },
+    {
+     "id": "xgzx270",
+     "speaker": "host",
+     "emotion": "calm",
+     "text": "شش جعبه داریم، از یک تا شش.",
+     "direction": ""
+    },
+    {
+     "id": "sbrm4hq",
+     "speaker": "host",
+     "emotion": "excited",
+     "text": "دو تاشون پونزده ثانیه جایزه دارن.",
+     "direction": ""
+    },
+    {
+     "id": "d398qtl",
+     "speaker": "host",
+     "emotion": "taunt",
+     "text": "یکی‌شون پنج ثانیه از حریفت می‌دزده.",
+     "direction": ""
+    },
+    {
+     "id": "yqfvhdo",
+     "speaker": "host",
+     "emotion": "playful",
+     "text": "و سه تاشون... هیچی! فقط یه لقمه‌ی عجیب.",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "dde9ysg",
+   "type": "play",
+   "game": "mystery",
+   "title": "لقمهٔ مرموز",
+   "subtitle": "راند سه",
+   "rules": [],
+   "duration": 40,
+   "reward": 15,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "iu49sf4",
+     "speaker": "host",
+     "emotion": "suspense",
+     "text": "لقمه خورده شد... ببینیم توی جعبه چی بود.",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "lrpjimz",
+   "type": "intro",
+   "game": "mitts",
+   "title": "دستکش و پازل",
+   "subtitle": "راند چهار",
+   "rules": [],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "plidolg",
+     "speaker": "host",
+     "emotion": "playful",
+     "text": "راند چهارم رو با دستکش فر بازی می‌کنید!",
+     "direction": ""
+    },
+    {
+     "id": "kaa4yup",
+     "speaker": "host",
+     "emotion": "excited",
+     "text": "دستکش و پازل!",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "0kiro42",
+   "type": "rules",
+   "game": "mitts",
+   "title": "قوانین دستکش و پازل",
+   "subtitle": "",
+   "rules": [
+    "دستکش فر را بپوش",
+    "جعبهٔ چسبی را باز کن",
+    "۴ قطعهٔ آرم گرگ را بچین",
+    "خط پایان را لمس کن",
+    "جایزه: ۱۵+ و کارت خرابکاری"
+   ],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "lw1qfbt",
+     "speaker": "host",
+     "emotion": "calm",
+     "text": "اول دستکش فر رو می‌پوشید.",
+     "direction": ""
+    },
+    {
+     "id": "hfe7ryj",
+     "speaker": "host",
+     "emotion": "calm",
+     "text": "بعد جعبه‌ی چسب‌خورده رو باز می‌کنید.",
+     "direction": ""
+    },
+    {
+     "id": "28fukhg",
+     "speaker": "host",
+     "emotion": "serious",
+     "text": "چهار قطعه‌ی آرم گرگ رو پیدا می‌کنید و درست می‌چینید.",
+     "direction": ""
+    },
+    {
+     "id": "2yl0gzy",
+     "speaker": "host",
+     "emotion": "excited",
+     "text": "و می‌دوید سمت خط پایان!",
+     "direction": ""
+    },
+    {
+     "id": "as0xutn",
+     "speaker": "host",
+     "emotion": "suspense",
+     "text": "برنده پونزده ثانیه می‌گیره... و یه کارت خرابکاری برای حریفش.",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "bl6gpfk",
+   "type": "play",
+   "game": "mitts",
+   "title": "دستکش و پازل",
+   "subtitle": "راند چهار",
+   "rules": [],
+   "duration": 60,
+   "reward": 15,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "tkjdsc1",
+     "speaker": "host",
+     "emotion": "shock",
+     "text": "کارت خرابکاری رو شد!",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "fngzisg",
+   "type": "intro",
+   "game": "powers",
+   "title": "ریسک زمان",
+   "subtitle": "راند پنج",
+   "rules": [],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "kl70u8w",
+     "speaker": "host",
+     "emotion": "suspense",
+     "text": "حالا وقتشه ثانیه‌هاتون رو خرج کنید.",
+     "direction": ""
+    },
+    {
+     "id": "lfln51z",
+     "speaker": "host",
+     "emotion": "epic",
+     "text": "ریسک زمان!",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "jnpui73",
+   "type": "rules",
+   "game": "powers",
+   "title": "فروشگاه قدرت",
+   "subtitle": "",
+   "rules": [
+    "راهنما ۱۵ · جان اضافه ۲۵",
+    "کندسازی حریف ۲۰ · حالت سخت ۳۰",
+    "دو برابر یا هیچ",
+    "بازگشت ALL IN: +۵۰ یا −۳۰",
+    "خرید قبل از شروع قفل می‌شود"
+   ],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "anjjkzp",
+     "speaker": "host",
+     "emotion": "calm",
+     "text": "با ثانیه‌هاتون می‌تونید قدرت بخرید.",
+     "direction": ""
+    },
+    {
+     "id": "q89brut",
+     "speaker": "host",
+     "emotion": "calm",
+     "text": "راهنما پونزده ثانیه، جان اضافه بیست و پنج ثانیه.",
+     "direction": ""
+    },
+    {
+     "id": "lo6xb9x",
+     "speaker": "host",
+     "emotion": "taunt",
+     "text": "کندسازی حریف بیست ثانیه، حالت سخت سی ثانیه.",
+     "direction": ""
+    },
+    {
+     "id": "kj86ae7",
+     "speaker": "host",
+     "emotion": "suspense",
+     "text": "دو برابر یا هیچ... یا همه‌چیز یا هیچی.",
+     "direction": ""
+    },
+    {
+     "id": "c52ud4b",
+     "speaker": "host",
+     "emotion": "epic",
+     "text": "و بازگشت! فقط یک بار، فقط برای کسی که عقبه. موفق بشی پنجاه ثانیه، شکست بخوری سی ثانیه می‌سوزه.",
+     "direction": ""
+    },
+    {
+     "id": "sr07axb",
+     "speaker": "host",
+     "emotion": "referee",
+     "text": "خرید که انجام شد، قفله.",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "i5o4j56",
+   "type": "play",
+   "game": "powers",
+   "title": "ریسک زمان",
+   "subtitle": "راند پنج",
+   "rules": [],
+   "duration": 45,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "8n033hp",
+     "speaker": "host",
+     "emotion": "referee",
+     "text": "خرید قفل شد.",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "qkulpw9",
+   "type": "bank",
+   "game": "generic",
+   "title": "قبل از فینال",
+   "subtitle": "وضعیت بانک زمان",
+   "rules": [],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "e1uxlq6",
+     "speaker": "host",
+     "emotion": "suspense",
+     "text": "قبل از فینال، بیاید ببینیم کی چقدر ثانیه داره.",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "ela1j47",
+   "type": "intro",
+   "game": "vault",
+   "title": "توالی نهایی",
+   "subtitle": "راند شش · کیف طلایی",
+   "rules": [],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "lfqsr59",
+     "speaker": "host",
+     "emotion": "epic",
+     "text": "رسیدیم به آخرین مرحله.",
+     "direction": ""
+    },
+    {
+     "id": "f6qynr6",
+     "speaker": "host",
+     "emotion": "suspense",
+     "text": "سه مرحله، سه رمز... و یک کیف طلایی.",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "3185dxk",
+   "type": "rules",
+   "game": "vault",
+   "title": "قوانین توالی نهایی",
+   "subtitle": "",
+   "rules": [
+    "۱ · نقاشی با چشم بسته → رمز ۱",
+    "۲ · ساخت از حافظه → رمز ۲",
+    "۳ · چالش منطق → رمز ۳",
+    "۴ · سه رمز = باز شدن کیف",
+    "ترتیب اشتباه فقط همان مرحله را ریست می‌کند"
+   ],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "yj79th4",
+     "speaker": "host",
+     "emotion": "calm",
+     "text": "مرحله اول: نقاشی با چشم بسته. تصویر رو چند ثانیه می‌بینید و بعد از حافظه می‌کشید.",
+     "direction": ""
+    },
+    {
+     "id": "7m1opku",
+     "speaker": "host",
+     "emotion": "calm",
+     "text": "مرحله دوم: یه الگو رو کوتاه نشونتون می‌دم، باید دقیقاً بازسازیش کنید.",
+     "direction": ""
+    },
+    {
+     "id": "hoyutmy",
+     "speaker": "host",
+     "emotion": "serious",
+     "text": "مرحله سوم: یه معمای منطقی که فقط با اطلاعات دو مرحله‌ی قبل حل می‌شه.",
+     "direction": ""
+    },
+    {
+     "id": "x0nkeze",
+     "speaker": "host",
+     "emotion": "epic",
+     "text": "هر مرحله یه رمز می‌ده. سه رمز، کیف طلایی رو باز می‌کنه.",
+     "direction": ""
+    },
+    {
+     "id": "cygkspb",
+     "speaker": "host",
+     "emotion": "referee",
+     "text": "اشتباه کنی، فقط همون مرحله از اول شروع می‌شه.",
+     "direction": ""
+    }
+   ]
+  },
+  {
+   "id": "3kxwxw2",
+   "type": "countdown",
+   "game": "generic",
+   "title": "فینال!",
+   "subtitle": "",
+   "rules": [],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": []
+  },
+  {
+   "id": "7kgyiuc",
+   "type": "play",
+   "game": "vault",
+   "title": "توالی نهایی",
+   "subtitle": "کیف طلایی",
+   "rules": [],
+   "duration": 90,
+   "reward": 0,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": []
+  },
+  {
+   "id": "8r13riq",
+   "type": "winner",
+   "game": "generic",
+   "title": "قهرمان داداش‌مود",
+   "subtitle": "کیف طلایی باز شد",
+   "rules": [],
+   "duration": 30,
+   "reward": 10,
+   "notes": "",
+   "issue": "",
+   "status": "ok",
+   "winner": "",
+   "lines": [
+    {
+     "id": "3jzfpxr",
+     "speaker": "host",
+     "emotion": "suspense",
+     "text": "و قهرمان این قسمت از داداش‌مود...",
+     "direction": ""
+    },
+    {
+     "id": "a0v6dem",
+     "speaker": "host",
+     "emotion": "celebrate",
+     "text": "تبریک! فوق‌العاده بود!",
+     "direction": ""
+    }
+   ]
+  }
+ ],
+ "id": "ep1-time-bank"
+}
